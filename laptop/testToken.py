@@ -4,12 +4,17 @@ from itsdangerous import (TimedJSONWebSignatureSerializer \
 import time
 
 # initialization
-# app = Flask(__name__)
-# app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
+ app = Flask(__name__)
+ app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
+
+ api = Api(app)
+
+ client = MongoClient("db", 27017)
+ db = client.tododb
 
 def generate_auth_token(expiration=600):
    # s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
-   s = Serializer('test1234@#$', expires_in=expiration)
+   s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
    # pass index of user
    return s.dumps({'id': 1})
 
@@ -26,5 +31,5 @@ def verify_auth_token(token):
 if __name__ == "__main__":
     t = generate_auth_token(10)
     for i in range(1, 20):
-	print verify_auth_token(t)
+        print(verify_auth_token(t))
         time.sleep(1)

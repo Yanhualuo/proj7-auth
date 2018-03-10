@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+	border: 1px solid black;
+}
+</style>
+</head>
+
+<body>
+<h1>Result</h1>
+<table style="width:100%">
+	<tr align="left">
+    <th>km</th>
+    <th>Open</th> 
+    <th>Close</th>
+  </tr>
+
+{% for item in items %} 
+	 <tr >
+	<td>{{item.km}}</td>
+  <td> {{ item.open_times }} </td>
+  <td> {{ item.close_times }} </td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
