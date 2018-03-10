@@ -4,6 +4,7 @@ import pymongo
 from flask import Flask, request, session, render_template, url_for, redirect
 from flask_restful import Resource, Api
 from pymongo import MongoClient
+from flask_httpauth import HTTPBasicAuth
 from passlib.apps import custom_app_context as pwd_context
 from itsdangerous import (TimedJSONWebSignatureSerializer \
                           as Serializer, BadSignature, \
@@ -20,6 +21,7 @@ client = MongoClient()
 db = client.time
 mongo = client.user
 
+auth = HTTPBasicAuth()
 
 #############################################
 def hash_password(password):
@@ -267,4 +269,4 @@ def login():
 
 # Run the application
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
