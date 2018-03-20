@@ -17,7 +17,7 @@ api = Api(app)
 app.secret_key = 'AAA'
 app.config['SESSION_TYPE'] = 'the quick brown fox jumps over the lazy dog'
 
-client = MongoClient()
+client = MongoClient('db', 27017)
 db = client.time
 mongo = client.user
 
@@ -243,9 +243,9 @@ def register():
         session['username'] = request.form['username']
         return redirect(url_for('index'))
         
-    return 'That username already exists!'
+    print( 'That username already exists!')
     
-return render_template('register.html')
+    return render_template('register.html')
 
 
 @app.route('/api/token', methods=['POST', 'GET'])
@@ -270,4 +270,4 @@ def resource():
 
 # Run the application
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
